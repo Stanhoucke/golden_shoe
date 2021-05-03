@@ -1,6 +1,7 @@
 package com.example.golden_shoe.components;
 
 import com.example.golden_shoe.models.Shoe;
+import com.example.golden_shoe.repositories.OrderRepository;
 import com.example.golden_shoe.repositories.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Component;
 public class DataLoader implements ApplicationRunner {
     @Autowired
     ShoeRepository shoeRepository;
+    @Autowired
+    OrderRepository orderRepository;
 
     public DataLoader() {
 
@@ -18,7 +21,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        orderRepository.deleteAll();
         shoeRepository.deleteAll();
+
         Shoe shoe1 = new Shoe("All Stars", "Converse");
         shoe1.addAvailableSize("7", 20);
         shoe1.addAvailableSize("8", 1);
@@ -34,10 +39,11 @@ public class DataLoader implements ApplicationRunner {
         shoe3.addAvailableSize("8", 10);
         shoe3.addAvailableSize("10", 6);
 
-
         shoeRepository.save(shoe1);
         shoeRepository.save(shoe2);
         shoeRepository.save(shoe3);
+
+
 
 
         for (Shoe shoe : shoeRepository.findAll()){
