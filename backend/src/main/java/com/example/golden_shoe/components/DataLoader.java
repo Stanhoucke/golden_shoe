@@ -1,7 +1,9 @@
 package com.example.golden_shoe.components;
 
+import com.example.golden_shoe.models.Order;
+import com.example.golden_shoe.models.PurchaseOrder;
 import com.example.golden_shoe.models.Shoe;
-import com.example.golden_shoe.repositories.OrderRepository;
+import com.example.golden_shoe.repositories.PurchaseOrderRepository;
 import com.example.golden_shoe.repositories.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -13,7 +15,7 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     ShoeRepository shoeRepository;
     @Autowired
-    OrderRepository orderRepository;
+    PurchaseOrderRepository purchaseOrderRepository;
 
     public DataLoader() {
 
@@ -21,9 +23,10 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        orderRepository.deleteAll();
+        purchaseOrderRepository.deleteAll();
         shoeRepository.deleteAll();
 
+        // Shoes
         Shoe shoe1 = new Shoe("All Stars", "Converse");
         shoe1.addAvailableSize("7", 20);
         shoe1.addAvailableSize("8", 1);
@@ -43,11 +46,20 @@ public class DataLoader implements ApplicationRunner {
         shoeRepository.save(shoe2);
         shoeRepository.save(shoe3);
 
-
-
-
         for (Shoe shoe : shoeRepository.findAll()){
             System.out.println(shoe);
         }
+
+        // Purchase Orders
+        PurchaseOrder purchaseOrder1 = new PurchaseOrder();
+
+        Order order1 = new Order(shoe1, 7, 2);
+        Order order2 = new Order(shoe3, 8, 1);
+
+        purchaseOrder1.orders.add(order1);
+        purchaseOrder1.orders.add(order2);
+
+        purchaseOrderRepository.save(purchaseOrder1);
+
     }
 }

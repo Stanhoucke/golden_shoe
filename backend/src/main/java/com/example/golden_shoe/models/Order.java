@@ -1,15 +1,13 @@
 package com.example.golden_shoe.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
-
-import java.util.ArrayList;
 
 public class Order {
 
-    @Id
-    public String id;
-
+    @JsonIgnoreProperties(value = {"sizes"})
     public Shoe shoe;
+
     public int size;
     public int quantity;
 
@@ -22,9 +20,4 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public String toString() {
-        return String.format(
-                "Order[id=%s, shoe='%s, size='%s', quantity='%s']",
-                id, shoe, size, quantity);
-    }
 }
