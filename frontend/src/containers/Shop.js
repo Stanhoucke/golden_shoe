@@ -13,7 +13,7 @@ const Shop = ({shoes}) => {
             <li key={shoe.id} className="shoe-item">
                 <div className="shoe">
                     <p>{shoe.brand}</p>
-                    <Link>
+                    <Link to = {"/shoes/" + shoe.id}>
                         {shoe.name}
                     </Link>
                 </div>
@@ -28,7 +28,6 @@ const Shop = ({shoes}) => {
             <ul className="shoes-list">
                 {shoesList}
             </ul>
-            <ShoeDetails/>
         </>
     )
 }
