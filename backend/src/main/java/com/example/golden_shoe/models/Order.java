@@ -10,14 +10,16 @@ public class Order {
 
     public int size;
     public int quantity;
+    public double price;
 
 
     public Order() {}
 
-    public Order(Shoe shoe, int size, int quantity) {
+    public Order(Shoe shoe, int size, int quantity, double price) {
         this.shoe = shoe;
         this.size = size;
         this.quantity = quantity;
+        this.price = price;
     }
 
 }
