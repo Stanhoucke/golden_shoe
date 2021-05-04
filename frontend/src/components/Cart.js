@@ -4,14 +4,14 @@ const Cart = ({cart, removeFromCart, postCartItems, emptyCart}) => {
   
     const listItemsInCart = () => cart.map((item, index) => (
       <div key={index}>
-        ({item.quantity} x £{item.price}) {item.shoe.name}
+        ({item.quantity} x £{item.price.toFixed(2)}) {item.shoe.name} Size: {item.size}
         <button type="submit" onClick={() => removeFromCart(item)}>Remove</button>
       </div>
     ));
 
-    const cartTotal = cart.reduce((total, { price = 0 }) => {
-        return total + price
-    }, 0);
+    const cartTotal = cart.reduce((total, item) => {
+        return total + (item.price * item.quantity)
+    },0);
 
     const handleCheckout = () => {
         const orders = {
@@ -28,7 +28,7 @@ const Cart = ({cart, removeFromCart, postCartItems, emptyCart}) => {
             <div>
                 {listItemsInCart()}
             </div>
-            <h3>£{cartTotal}</h3>
+            <h3>£{cartTotal.toFixed(2)}</h3>
             <button onClick={handleCheckout}>Checkout</button>
         </>
     )
