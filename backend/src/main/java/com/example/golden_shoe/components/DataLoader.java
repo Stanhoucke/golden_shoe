@@ -27,17 +27,17 @@ public class DataLoader implements ApplicationRunner {
         shoeRepository.deleteAll();
 
         // Shoes
-        Shoe shoe1 = new Shoe("All Stars", "Converse");
+        Shoe shoe1 = new Shoe("All Stars", "Converse", 52.00);
         shoe1.addAvailableSize("7", 20);
         shoe1.addAvailableSize("8", 1);
         shoe1.addAvailableSize("9", 5);
 
-        Shoe shoe2 = new Shoe("Stan Smith", "Adidas");
+        Shoe shoe2 = new Shoe("Stan Smith", "Adidas", 75.00);
         shoe2.addAvailableSize("6", 7);
         shoe2.addAvailableSize("7", 4);
         shoe2.addAvailableSize("11", 2);
 
-        Shoe shoe3 = new Shoe("Gazelle", "Adidas");
+        Shoe shoe3 = new Shoe("Gazelle", "Adidas", 70.00);
         shoe3.addAvailableSize("6", 4);
         shoe3.addAvailableSize("8", 10);
         shoe3.addAvailableSize("10", 6);

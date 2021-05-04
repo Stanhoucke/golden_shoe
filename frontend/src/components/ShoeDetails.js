@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ShoeDetails = ({shoe}) => {
+const ShoeDetails = ({shoe, addToCart}) => {
 
     if (!shoe) {
         return <p>Loading...</p>
@@ -14,6 +14,17 @@ const ShoeDetails = ({shoe}) => {
         )
     })
 
+    const handleAddShoeToCart = () => {
+        const item = {
+            "shoe": shoe,
+            "size": "7",
+            "quantity": 1,
+            "price": 50.00
+        }
+
+        addToCart(item);
+    }
+
     return(
         <>
             <h3>ShoeDetails</h3>
@@ -25,6 +36,7 @@ const ShoeDetails = ({shoe}) => {
                     <select className="sizes">
                         {shoeSizes}
                     </select>
+                    <button onClick={handleAddShoeToCart}>Add to Cart</button>
             </div>
             <Link to = {"/"}>Back to shop</Link>
         </>

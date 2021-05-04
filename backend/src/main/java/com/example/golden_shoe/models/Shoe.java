@@ -12,19 +12,21 @@ public class Shoe {
     public String name;
     public String brand;
     public ArrayList<HashMap<String, Integer>> sizes;
+    public double price;
 
     public Shoe() {}
 
-    public Shoe(String name, String brand) {
+    public Shoe(String name, String brand, double price) {
         this.name = name;
         this.brand = brand;
         this.sizes = new ArrayList<HashMap<String, Integer>>();
+        this.price = price;
     }
 
     public String toString() {
         return String.format(
-                "Shoe[id=%s, name='%s', brand='%s', sizes='%s']",
-                id, name, brand, sizes);
+                "Shoe[id=%s, name='%s', brand='%s', sizes='%s', price='%s]",
+                id, name, brand, sizes, price);
     }
 
     public void addAvailableSize(String size, Integer numberAvailable){
