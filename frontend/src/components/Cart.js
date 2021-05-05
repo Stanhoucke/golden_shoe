@@ -20,6 +20,8 @@ const Cart = ({cart, removeFromCart, postCartItems, emptyCart}) => {
 
         postCartItems(orders);
         emptyCart();
+
+        // fetch shoes again - move to app?
     }
 
     return(

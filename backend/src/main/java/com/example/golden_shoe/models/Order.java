@@ -8,14 +8,14 @@ public class Order {
     @JsonIgnoreProperties(value = {"sizes"})
     public Shoe shoe;
 
-    public int size;
+    public String size;
     public int quantity;
     public double price;
 
 
     public Order() {}
 
-    public Order(Shoe shoe, int size, int quantity, double price) {
+    public Order(Shoe shoe, String size, int quantity, double price) {
         this.shoe = shoe;
         this.size = size;
         this.quantity = quantity;

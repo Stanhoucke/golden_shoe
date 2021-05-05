@@ -21,4 +21,20 @@ public class PurchaseOrder {
                 "PurchaseOrder[id=%s, orders='%s']",
                 id, orders);
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
 }
