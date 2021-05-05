@@ -74,4 +74,30 @@ public class Shoe {
         availableSizes.put(size, numberAvailable);
         this.sizes.add(availableSizes);
     }
+
+    public void reduceStock(String checkSize, int amount) {
+        for (HashMap<String, Integer> size : this.sizes) {
+            if (size.containsKey(checkSize)){
+                Integer stock = size.get(checkSize);
+                if (stock >= amount) {
+                    stock -= amount;
+                    size.replace(checkSize, stock);
+                }
+            }
+        }
+    }
+
+    public void removeSizesWithoutStock() {
+
+        for (int i = 0; i < this.sizes.size(); i++) {
+            if (this.sizes.get(i).containsValue(0)){
+                this.sizes.remove(i);
+            }
+        }
+    }
+
+    public void updatePurchasedStock(String size, int amount) {
+        reduceStock(size, amount);
+        removeSizesWithoutStock();
+    }
 }

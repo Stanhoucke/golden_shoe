@@ -29,4 +29,27 @@ public class ShoeTest {
         assertEquals(1, shoe1.getSizes().size());
     }
 
+    @Test
+    void canReduceStock() {
+        shoe1.addAvailableSize("5", 10);
+        shoe1.reduceStock("5", 2);
+        assertEquals(8, shoe1.getSizes().get(0).get("5"));
+    }
+
+    @Test
+    void canRemoveSizesWithoutStock() {
+        shoe1.addAvailableSize("5", 0);
+        shoe1.removeSizesWithoutStock();
+        assertEquals(0, shoe1.getSizes().size());
+    }
+
+    @Test
+    void canUpdatePurchasedStock() {
+        shoe1.addAvailableSize("5", 3);
+        shoe1.updatePurchasedStock("5", 3);
+        assertEquals(0, shoe1.getSizes().size());
+
+
+    }
+
 }
