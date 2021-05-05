@@ -1,7 +1,7 @@
 import React from 'react';
+import ShoeDetails from './ShoeDetails';
 
 const Cart = ({cart, removeFromCart, postCartItems, emptyCart}) => {
-  
     const listItemsInCart = () => cart.map((item, index) => (
       <div key={index}>
         ({item.quantity} x £{item.price.toFixed(2)}) {item.shoe.name} Size: {item.size}

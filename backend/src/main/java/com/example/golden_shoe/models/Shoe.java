@@ -7,12 +7,12 @@ import java.util.HashMap;
 
 public class Shoe {
     @Id
-    public String id;
+    private String id;
 
-    public String name;
-    public String brand;
-    public ArrayList<HashMap<String, Integer>> sizes;
-    public double price;
+    private String name;
+    private String brand;
+    private ArrayList<HashMap<String, Integer>> sizes;
+    private double price;
 
     public Shoe() {}
 
@@ -27,6 +27,46 @@ public class Shoe {
         return String.format(
                 "Shoe[id=%s, name='%s', brand='%s', sizes='%s', price='%s]",
                 id, name, brand, sizes, price);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public ArrayList<HashMap<String, Integer>> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(ArrayList<HashMap<String, Integer>> sizes) {
+        this.sizes = sizes;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void addAvailableSize(String size, Integer numberAvailable){

@@ -32,7 +32,6 @@ const ShoeDetails = ({shoe, addToCart}) => {
                 inStock = true;
             }
         }
-        console.log(inStock);
         return inStock;
     }
 
