@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import './App.css';
 import Shop from './containers/Shop';
 import ShoeDetails from './components/ShoeDetails';
 import Cart from './components/Cart';
 import Request from './helpers/Request';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   const [shoes, setShoes] = useState([]);
@@ -33,7 +33,22 @@ function App() {
   }
 
   const addToCart = (item) => {
-    setCart((currentCart) => [...currentCart, item])
+    if (cart.length === 0){
+      setCart((currentCart) => [...currentCart, item])
+    } else {
+      let foundDuplicate = false;
+      for (const cartItem of cart) {
+        if (cartItem.shoe.id === item.shoe.id && cartItem.size === item.size){
+          cartItem.quantity += item.quantity;
+          foundDuplicate = true;
+        }
+      }
+  
+      if (!foundDuplicate) {
+        setCart((currentCart) => [...currentCart, item])
+      }
+    }
+
   };
 
   const removeFromCart = (item) => {
@@ -58,9 +73,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <h1>Golden Shoe</h1>
-        <Link to = {"/cart"}>View cart</Link>
-        <Link to = {"/"}>Back to shop</Link>
+        <NavBar/>
         <Switch>
           <Route exact path="/cart" render={() => {
             return <Cart
