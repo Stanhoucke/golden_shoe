@@ -1,7 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const ShoeUl = styled.ul`
+background-color: pink;
+list-style: none;
+padding: 0px;
+display: flex;
+
+
+.shoe-link {
+    text-decoration: none;
+}
+
+.shoe-image-main {
+    height: 50vh;
+}
+`;
 
 const Shop = ({shoes}) => {
+    const imgUrl = "http://localhost:8080/api/getImages/"
 
     if (shoes.length === 0){
         return (<p>Loading...</p>)
@@ -10,12 +28,14 @@ const Shop = ({shoes}) => {
     const shoesList = shoes.map((shoe, index) => {
         return (
             <li key={shoe.id} className="shoe-item">
-                <div className="shoe">
-                    <p>{shoe.brand}</p>
-                    <Link to = {"/shoes/" + shoe.id}>
-                        {shoe.name}
-                    </Link>
-                </div>
+                <Link to = {"/shoes/" + shoe.id} className="shoe-link">
+                    <div className="shoe">
+                        <img src={imgUrl + shoe.imageUrls[0]} className="shoe-image-main" alt={shoe.brand + " " + shoe.name + " image"}/>
+                        <p>{shoe.brand}</p>
+                        <p>{shoe.name}</p>
+                        <p>£{shoe.price.toFixed(2)}</p>
+                    </div>
+                </Link>
 
             </li>
         )
@@ -24,9 +44,9 @@ const Shop = ({shoes}) => {
     return(
         <>
             <h3>Shop</h3>
-            <ul className="shoes-list">
+            <ShoeUl className="shoes-list">
                 {shoesList}
-            </ul>
+            </ShoeUl>
         </>
     )
 }

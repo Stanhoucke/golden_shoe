@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 
 public class Order {
 
-    @JsonIgnoreProperties(value = {"sizes"})
+    @JsonIgnoreProperties(value = {"sizes", "imageUrls"})
     public Shoe shoe;
 
     public String size;

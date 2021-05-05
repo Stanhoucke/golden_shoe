@@ -13,6 +13,7 @@ public class Shoe {
     private String brand;
     private ArrayList<HashMap<String, Integer>> sizes;
     private double price;
+    private ArrayList<String> imageUrls;
 
     public Shoe() {}
 
@@ -21,6 +22,7 @@ public class Shoe {
         this.brand = brand;
         this.sizes = new ArrayList<HashMap<String, Integer>>();
         this.price = price;
+        this.imageUrls = new ArrayList<String>();
     }
 
     public String toString() {
@@ -67,6 +69,18 @@ public class Shoe {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public ArrayList<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(ArrayList<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
+    public void addImageUrl(String url) {
+        this.imageUrls.add(url);
     }
 
     public void addAvailableSize(String size, Integer numberAvailable){
