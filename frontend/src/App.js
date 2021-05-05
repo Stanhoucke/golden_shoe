@@ -69,6 +69,17 @@ function App() {
   const emptyCart = () => {
     setCart([])
   }
+
+  const handleCheckout = () => {
+    const orders = {
+        "orders": cart
+    }
+
+    postCartItems(orders);
+    emptyCart();
+
+    getShoes();
+}
   
   return (
     <div className="App">
@@ -79,8 +90,7 @@ function App() {
             return <Cart
               cart={cart}
               removeFromCart={removeFromCart}
-              postCartItems={postCartItems}
-              emptyCart={emptyCart}/>
+              handleCheckout={handleCheckout}/>
           }} />
 
           <Route exact path="/shoes/:id" render={(props) => {
