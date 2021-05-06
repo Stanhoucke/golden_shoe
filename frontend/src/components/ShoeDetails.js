@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
+const NoStockMessage = styled.div`
+    margin: 0 5%;
+    background-color: rgba(255, 0, 0, 0.2);
+    color: red;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    border: solid;
+`;
 
 const ShoeDetailContainer = styled.div`
     margin: 0 5%;
@@ -10,15 +22,18 @@ const ShoeDetailContainer = styled.div`
     grid-template-rows: 1fr 3fr;
     background-color: lightgray;
 
+    .carousel-root {
+        width: 75%;
+    }
+
     .shoe-images {
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
         grid-row-end: 3;
-    }
 
-    .shoe-image-main {
-        width: 50vw;
+        display: flex;
+        justify-content: center;
     }
 
     .shoe-info {
@@ -63,9 +78,6 @@ const ShoeDetailContainer = styled.div`
         grid-row-start: 1;
         grid-row-end: 2;
     }
-    .shoe-image-main {
-        width: 80vw
-    }
     .shoe-info {
         grid-column-start: 1;
         grid-column-end: 2;
@@ -102,7 +114,15 @@ const ShoeDetailContainer = styled.div`
         grid-row-start: 3;
         grid-row-end: 4;
     }
-
+    @media (max-width: 360px) {
+        .carousel-root {
+            margin-left: 5%;
+        }
+        .shoe-images {
+            width: 90%;
+            justify-content: flex-start;
+        }
+    }
 }
 `;
 
@@ -141,7 +161,9 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
     }
 
     const stockMessage = (checkStock) ?
-        <p>This item is unavailable in this quantity</p>
+        <NoStockMessage>
+            <p id="no-stock-message">This item is unavailable in this quantity</p>
+        </NoStockMessage>
         :
         <></>
 
@@ -171,7 +193,18 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
             {stockMessage}
             <ShoeDetailContainer>
                 <div className="shoe-images">
-                    <img src={imgUrl + shoe.imageUrls[0]} className="shoe-image-main" alt={shoe.brand + " " + shoe.name + " image"}/>
+                    {/* <img src={imgUrl + shoe.imageUrls[0]} className="shoe-image-main" alt={shoe.brand + " " + shoe.name + " image"}/> */}
+                    <Carousel>
+                        <div>
+                            <img src={imgUrl + shoe.imageUrls[0]} />
+                        </div>
+                        <div>
+                            <img src={imgUrl + shoe.imageUrls[1]} />
+                        </div>
+                        <div>
+                            <img src={imgUrl + shoe.imageUrls[2]} />
+                        </div>
+                    </Carousel>
                 </div>
 
                 <div className="shoe-info">
