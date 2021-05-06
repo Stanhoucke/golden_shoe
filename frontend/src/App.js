@@ -92,7 +92,8 @@ function App() {
             return <Cart
               cart={cart}
               removeFromCart={removeFromCart}
-              handleCheckout={handleCheckout}/>
+              handleCheckout={handleCheckout}
+              imgUrl={imgUrl}/>
           }} />
 
           <Route exact path="/shoes/:id" render={(props) => {

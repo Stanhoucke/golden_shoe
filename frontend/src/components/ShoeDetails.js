@@ -162,7 +162,7 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
 
     const stockMessage = (checkStock) ?
         <NoStockMessage>
-            <p id="no-stock-message">This item is unavailable in this quantity</p>
+            <p id="no-stock-message">This item is currently unavailable in this quantity</p>
         </NoStockMessage>
         :
         <></>
