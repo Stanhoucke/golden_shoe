@@ -5,13 +5,17 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 
 const NoStockMessage = styled.div`
-    margin: 0 5%;
+    margin: 1em 5%;
     background-color: rgba(255, 0, 0, 0.2);
     color: red;
     font-weight: bold;
     display: flex;
     justify-content: center;
     border: solid;
+`;
+
+const HomeLink = styled.div`
+    margin: 2em 0;
 `;
 
 const ShoeDetailContainer = styled.div`
@@ -189,20 +193,19 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
 
     return(
         <>
-            <h3>ShoeDetails</h3>
             {stockMessage}
             <ShoeDetailContainer>
                 <div className="shoe-images">
                     {/* <img src={imgUrl + shoe.imageUrls[0]} className="shoe-image-main" alt={shoe.brand + " " + shoe.name + " image"}/> */}
                     <Carousel>
                         <div>
-                            <img src={imgUrl + shoe.imageUrls[0]} />
+                            <img src={imgUrl + shoe.imageUrls[0]} alt={shoe.brand + " " + shoe.name + " image"}/>
                         </div>
                         <div>
-                            <img src={imgUrl + shoe.imageUrls[1]} />
+                            <img src={imgUrl + shoe.imageUrls[1]} alt={shoe.brand + " " + shoe.name + " image"}/>
                         </div>
                         <div>
-                            <img src={imgUrl + shoe.imageUrls[2]} />
+                            <img src={imgUrl + shoe.imageUrls[2]} alt={shoe.brand + " " + shoe.name + " image"}/>
                         </div>
                     </Carousel>
                 </div>
@@ -228,8 +231,9 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
                         </button>
                 </div>
             </ShoeDetailContainer>
-
-            <Link to = {"/"}>Back to shop</Link>
+            <HomeLink>
+                <Link to = {"/"}>Back to shop</Link>
+            </HomeLink>
         </>
     )
 }

@@ -46,7 +46,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl}) => {
     const listItemsInCart = () => cart.map((item, index) => (
       <tr key={index}>
         <td>
-              <img className="table-image" src={imgUrl + item.shoe.imageUrls[0]}/>
+            <img className="table-image" src={imgUrl + item.shoe.imageUrls[0]} alt={item.shoe.brand + " " + item.shoe.name + " image"}/>
         </td>
         <td>{item.shoe.name} size: {item.size}</td>
         <td>{item.quantity}</td>
@@ -73,7 +73,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl}) => {
 
     return(
         <CartStyle>
-            <h3>Cart</h3>
+            <h3>SHOPPING CART</h3>
             <table className="table">
                 <thead className="table-header">
                     <tr>

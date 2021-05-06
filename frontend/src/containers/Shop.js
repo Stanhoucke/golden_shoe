@@ -2,6 +2,49 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const MailingList = styled.div`
+    margin: 2em 5%;
+    display: flex;
+    justify-content: space-around;
+    padding: 2em;
+    background-color: darkred;
+    color: white;
+
+    .mailing-list-message {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+    .mailing-list-message > a {
+        color: white;
+        margin: 18px 0;
+    }
+
+    .discount-wrapper {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    #discount {
+        font-size: 10em;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+
+        .discount-wrapper {
+            order: -1;
+            align-items: flex-start;
+        }
+    }
+`;
+
 const ShoeUl = styled.ul`
 list-style: none;
 padding: 0px;
@@ -10,6 +53,7 @@ display: grid;
 grid-template-columns: repeat(3, 1fr);
 column-gap: 5px;
 row-gap: 5px;
+margin-bottom: 5%;
 
 .shoe {
     background-color: lightgrey;
@@ -82,7 +126,19 @@ const Shop = ({shoes, imgUrl}) => {
 
     return(
         <>
-            <h3>Shop</h3>
+            <MailingList>
+                <div className="mailing-list-message">
+                    <p>Be the first to hear about new releases!</p>
+                    <p>Receive discount vouchers</p>
+                    <Link to = {"/"}>Add me to mailing list</Link>
+                </div>
+                <div className="discount-wrapper">
+                    <h1 id="discount">£10</h1>
+                    <h3>DISCOUNT - online & in-store</h3>
+                </div>
+            </MailingList>
+
+            <h3>ALL PRODUCTS</h3>
             <ShoeUl className="shoes-list">
                 {shoesList}
             </ShoeUl>
