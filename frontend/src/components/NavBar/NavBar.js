@@ -5,6 +5,11 @@ import Burger from './Burger';
 
 const Nav = styled.nav`
     background-color: darkred;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+
     padding: 0 5%;
     height: 55px;
     box-shadow: 0 0 5px rgb(200 0 0 / 50%);

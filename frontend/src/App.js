@@ -85,6 +85,7 @@ function App() {
     <div className="App">
       <Router>
         <NavBar/>
+        <div id="navbar-gap"></div>
         <Switch>
           <Route exact path="/cart" render={() => {
             return <Cart

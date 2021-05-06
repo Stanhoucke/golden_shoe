@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Ul = styled.ul`
     padding-left: 0;
-    width: 100%;
+    width: 50%;
     list-style: none;
     display: flex;
     justify-content: flex-end;
@@ -27,11 +27,14 @@ const Ul = styled.ul`
         transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
         right: 0;
         margin: 0;
-        padding: 3.5em 0em;
+        padding: 12.5vh 0em;
         transition: transform 0.3s ease-in-out;
         li {
             height: 25vh;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 `;
