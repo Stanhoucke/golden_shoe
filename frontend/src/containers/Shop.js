@@ -57,9 +57,7 @@ row-gap: 5px;
 
 `;
 
-const Shop = ({shoes}) => {
-    const imgUrl = "http://localhost:8080/api/getImages/"
-
+const Shop = ({shoes, imgUrl}) => {
     if (shoes.length === 0){
         return (<p>Loading...</p>)
     }

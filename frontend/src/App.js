@@ -11,6 +11,7 @@ function App() {
   const [cart, setCart] = useState([]);
 
   const request = new Request();
+  const imgUrl = "http://localhost:8080/api/getImages/"
   
   useEffect (() => {
     getShoes();
@@ -99,11 +100,12 @@ function App() {
             const shoe = findShoeById(id);
             return <ShoeDetails 
               shoe={shoe}
-              addToCart={addToCart} />
+              addToCart={addToCart}
+              imgUrl={imgUrl} />
           }} />
 
           <Route render={() => {
-            return <Shop shoes={shoes}/>
+            return <Shop shoes={shoes} imgUrl={imgUrl}/>
           }} />
         </Switch>
       </Router>
