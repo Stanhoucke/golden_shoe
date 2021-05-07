@@ -63,10 +63,6 @@ public class DataLoader implements ApplicationRunner {
         shoeRepository.save(shoe3);
         shoeRepository.save(shoe4);
 
-        for (Shoe shoe : shoeRepository.findAll()){
-            System.out.println(shoe);
-        }
-
         // Purchase Orders
         PurchaseOrder purchaseOrder1 = new PurchaseOrder();
 

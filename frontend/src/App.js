@@ -86,7 +86,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar/>
+        <NavBar cartSize={cart.length}/>
         <div id="navbar-gap"></div>
         <Switch>
           <Route exact path="/help" render={() => {

@@ -35,7 +35,7 @@ const StyledBurger = styled.div`
   }
 `;
 
-const Burger = () => {
+const Burger = ({cartSize}) => {
     const [open, setOpen] = useState(false)
 
     const handleBurgerClick = () => {
@@ -49,7 +49,7 @@ const Burger = () => {
             <div />
             <div />
         </StyledBurger>
-        <SideBar open={open} handleBurgerClick={handleBurgerClick}/>
+        <SideBar open={open} handleBurgerClick={handleBurgerClick} cartSize={cartSize}/>
         </>
     )
 }

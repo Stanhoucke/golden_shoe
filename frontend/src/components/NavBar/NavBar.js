@@ -31,13 +31,13 @@ const Nav = styled.nav`
 
 `;
 
-const NavBar = () => {
+const NavBar = ({cartSize}) => {
     return (
         <Nav>
             <div className="logo">
                 <Link to = {"/"} id="golden-shoe">Golden Shoe</Link>
             </div>
-            <Burger/>
+            <Burger cartSize={cartSize}/>
         </Nav>
     )
 }

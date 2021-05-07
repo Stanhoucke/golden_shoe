@@ -19,6 +19,21 @@ const Ul = styled.ul`
             font-weight: bold;
         }
 
+        #cart-link {
+          display: flex;
+        }
+        .cart-size {
+          background-color: white;
+          color: darkred;
+          height: 15px;
+          width: 15px;
+          font-size: 12px;
+          border-radius: 50%;
+          display: inline-block;
+          align-self: flex-start;
+          margin-left: 3px;
+        }
+
     @media (max-width: 768px) {
         background-color: darkred;
         flex-direction: column;
@@ -39,11 +54,11 @@ const Ul = styled.ul`
     }
 `;
 
-const SideBar = ({open, handleBurgerClick}) => {
+const SideBar = ({open, handleBurgerClick, cartSize}) => {
     return (
         <Ul open={open}>
           <li>
-            <Link to = {"/cart"} className="nav-link" onClick={handleBurgerClick}>Cart</Link>
+            <Link to = {"/cart"} id="cart-link" className="nav-link" onClick={handleBurgerClick}>Cart <span className="cart-size">{cartSize}</span></Link>
           </li> 
           <li>
             <Link to = {"/"} className="nav-link" onClick={handleBurgerClick}>Home</Link>
