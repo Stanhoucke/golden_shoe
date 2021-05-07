@@ -49,7 +49,7 @@ const SideBar = ({open, handleBurgerClick}) => {
             <Link to = {"/"} className="nav-link" onClick={handleBurgerClick}>Home</Link>
           </li>
           <li>
-            <Link to = {"/"} className="nav-link" onClick={handleBurgerClick}>Help</Link>
+            <Link to = {"/help"} className="nav-link" onClick={handleBurgerClick}>Help</Link>
           </li>
           
         </Ul>

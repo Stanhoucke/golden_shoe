@@ -51,9 +51,17 @@ public class DataLoader implements ApplicationRunner {
         shoe3.addImageUrl("Gazelle_2.jpeg");
         shoe3.addImageUrl("Gazelle_3.jpeg");
 
+        Shoe shoe4 = new Shoe("KD14", "Nike", 129.95);
+        shoe4.addAvailableSize("6", 10);
+        shoe4.addAvailableSize("9", 4);
+        shoe4.addImageUrl("Kd14_1.jpeg");
+        shoe4.addImageUrl("Kd14_2.png");
+        shoe4.addImageUrl("Kd14_3.png");
+
         shoeRepository.save(shoe1);
         shoeRepository.save(shoe2);
         shoeRepository.save(shoe3);
+        shoeRepository.save(shoe4);
 
         for (Shoe shoe : shoeRepository.findAll()){
             System.out.println(shoe);

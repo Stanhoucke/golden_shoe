@@ -65,7 +65,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl}) => {
         return(
             <>
                 <h3>Your cart is empty</h3>
-                <p>Once you add something to your bag - it will appear here. Ready to get started?</p>
+                <p>Once you add something to your cart - it will appear here. Ready to get started?</p>
                 <Link to = {"/"}>Back to shop</Link>
             </>
         )

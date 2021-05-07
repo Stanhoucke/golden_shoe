@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 const NoStockMessage = styled.div`
@@ -70,6 +70,10 @@ const ShoeDetailContainer = styled.div`
         align-items: flex-start;
 
         padding-left: 2em;
+    }
+
+    #size-guide-link {
+        padding-left: 1em;
     }
 
 @media (max-width: 1024px) {
@@ -196,7 +200,6 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
             {stockMessage}
             <ShoeDetailContainer>
                 <div className="shoe-images">
-                    {/* <img src={imgUrl + shoe.imageUrls[0]} className="shoe-image-main" alt={shoe.brand + " " + shoe.name + " image"}/> */}
                     <Carousel>
                         <div>
                             <img src={imgUrl + shoe.imageUrls[0]} alt={shoe.brand + " " + shoe.name + " image"}/>
@@ -216,10 +219,13 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
                         <p><strong>£{shoe.price.toFixed(2)}</strong></p>
                 </div>
                 <div className="shoe-form">
-                        <select className="sizes form-item" value={selectedSize} onChange={handleSelectedSizeChange}>
-                            <option value="" disabled hidden>Choose a size</option>
-                            {shoeSizes}
-                        </select>
+                        <div className="choose-size">
+                            <select className="sizes form-item" value={selectedSize} onChange={handleSelectedSizeChange}>
+                                <option value="" disabled hidden>Choose a size</option>
+                                {shoeSizes}
+                            </select>
+                            <Link id="size-guide-link" to = {"/help"}>size guide</Link>
+                        </div>
 
                         <div className="quantity-wrapper form-item">
                             <label htmlFor="quantity">Quantity: </label>

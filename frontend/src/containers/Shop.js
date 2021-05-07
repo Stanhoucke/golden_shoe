@@ -9,6 +9,8 @@ const MailingList = styled.div`
     padding: 2em;
     background-color: darkred;
     color: white;
+    border-top-left-radius: 150px;
+    border-bottom-left-radius: 150px;
 
     .mailing-list-message {
         width: 50%;
@@ -16,6 +18,7 @@ const MailingList = styled.div`
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-around;
+        padding-left: 2em;
     }
     .mailing-list-message > a {
         color: white;
@@ -32,15 +35,24 @@ const MailingList = styled.div`
     #discount {
         font-size: 10em;
         margin: 0;
+        color: gold;
     }
 
     @media (max-width: 768px) {
         flex-direction: column;
         align-items: center;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+
+        .mailing-list-message {
+            width: 80%;
+            align-items: center;
+            padding-left: 0em;
+        }
 
         .discount-wrapper {
             order: -1;
-            align-items: flex-start;
+            align-items: center;
         }
     }
 `;

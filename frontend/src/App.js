@@ -5,6 +5,7 @@ import ShoeDetails from './components/ShoeDetails';
 import Cart from './components/Cart';
 import Request from './helpers/Request';
 import NavBar from './components/NavBar/NavBar';
+import Help from './components/Help';
 
 function App() {
   const [shoes, setShoes] = useState([]);
@@ -88,6 +89,10 @@ function App() {
         <NavBar/>
         <div id="navbar-gap"></div>
         <Switch>
+          <Route exact path="/help" render={() => {
+            return <Help/>
+          }} />
+
           <Route exact path="/cart" render={() => {
             return <Cart
               cart={cart}
