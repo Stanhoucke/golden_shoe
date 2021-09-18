@@ -66,8 +66,8 @@ public class DataLoader implements ApplicationRunner {
         // Purchase Orders
         PurchaseOrder purchaseOrder1 = new PurchaseOrder();
 
-        Order order1 = new Order(shoe1, "7", 2, shoe1.getPrice());
-        Order order2 = new Order(shoe3, "8", 1, shoe3.getPrice());
+        Order order1 = new Order(shoe1, "7", 2);
+        Order order2 = new Order(shoe3, "8", 1);
 
         purchaseOrder1.orders.add(order1);
         purchaseOrder1.orders.add(order2);
