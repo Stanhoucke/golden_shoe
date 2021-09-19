@@ -11,8 +11,21 @@ import { ShoeContext } from './context/ShoeContext';
 
 function App() {
   const {shoes, fetchShoes} = useContext(ShoeContext);
+  const [discounts, setDiscounts] = useState([]);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [discountCode, setDiscountCode] = useState("");
+  const [appliedDiscount, setAppliedDiscount] = useState(undefined);
+
+  useEffect(() => {
+    fetchDiscounts();
+  }, [])
+  
+  useEffect(() => {
+    if (discountCode.length > 5){
+      findDiscountByInputCode();
+    }
+  }, [discountCode])
 
   useEffect(() => {
     const total = [...cart].reduce((total, { price, quantity }) => {
@@ -24,6 +37,16 @@ function App() {
 
   const request = new Request();
   const imgUrl = "http://localhost:8080/api/getImages/"
+
+  const fetchDiscounts = () => {
+    request.get("/api/discounts")
+        .then(data => {
+          const availableDiscounts = data.filter((discount) => {
+            return !discount.expired;
+            });
+          setDiscounts(availableDiscounts)
+        })
+  }
   
   const postCartItems = (orders) => {
     request.post("/api/purchase_orders", orders)
@@ -34,6 +57,12 @@ function App() {
     return shoes.find((shoe) => {
       return shoe.id === id;
     })
+  }
+
+  const findDiscountByInputCode = () => {
+    setAppliedDiscount(discounts.find((discount) => {
+      return discount.name === discountCode;
+    }))
   }
 
   const addToCart = (item) => {
@@ -74,10 +103,16 @@ function App() {
     setCart([])
   }
 
+  const handleEnterDiscountCode = (event) => {
+    setDiscountCode(event.target.value);
+}
+
   const handleCheckout = () => {
+    const discount = appliedDiscount === undefined ? null : appliedDiscount;
     const orders = {
         "orders": cart,
-        "total": total
+        "total": total,
+        "discount": discount
     }
 
     postCartItems(orders);
@@ -102,7 +137,8 @@ function App() {
               removeFromCart={removeFromCart}
               handleCheckout={handleCheckout}
               imgUrl={imgUrl}
-              total={total}/>
+              total={total}
+              handleEnterDiscountCode={handleEnterDiscountCode}/>
           }} />
 
           <Route exact path="/shoes/:id" render={(props) => {

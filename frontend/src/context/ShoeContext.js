@@ -14,16 +14,16 @@ const ShoeProvider = ({children}) => {
     }, [])
     
     const fetchShoes = () => {
-    request.get("/api/shoes")
-    .then(data => {
-        setShoes(data)
+        request.get("/api/shoes")
+        .then(data => {
+            setShoes(data)
 
-        const featuredShoes = data.filter((shoe) => {
-        return shoe.featured;
-        });
-        setFeaturedShoes(featuredShoes);
+            const featuredShoes = data.filter((shoe) => {
+            return shoe.featured;
+            });
+            setFeaturedShoes(featuredShoes);
 
-    })
+        })
     }
 
     return (

@@ -42,7 +42,7 @@ const CartStyle = styled.div`
     }
 `;
 
-const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total}) => {
+const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterDiscountCode}) => {
     const listItemsInCart = () => cart.map((item, index) => (
       <tr key={index}>
         <td>
@@ -99,7 +99,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total}) => {
             </table>
 
             <label htmlFor="discount-code">Discount Code: </label>
-            <input type="text" name="discount-code" placeholder="Enter Discount Code"></input>
+            <input type="text" name="discount-code" placeholder="Enter Discount Code" onChange={handleEnterDiscountCode}></input>
             <div id="checkout">
                 <button onClick={handleCheckout}>Checkout</button>
             </div>
