@@ -1,11 +1,12 @@
 package com.example.golden_shoe.models;
 
+import com.example.golden_shoe.interfaces.IProduct;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Shoe {
+public class Shoe implements IProduct {
     @Id
     private String id;
 
@@ -83,19 +84,31 @@ public class Shoe {
         this.imageUrls.add(url);
     }
 
-    public void addAvailableSize(String size, Integer numberAvailable){
-        HashMap<String, Integer> availableSizes = new HashMap<>();
-        availableSizes.put(size, numberAvailable);
-        this.sizes.add(availableSizes);
+    public void addStock(String sizeName, Integer amount){
+        HashMap<String, Integer> sizeToAdd = new HashMap<>();
+        sizeToAdd.put(sizeName, amount);
+
+        boolean sizeExists = this.sizes.stream()
+                .anyMatch(s -> s.containsKey(sizeName));
+
+        if (sizeExists) {
+            for (HashMap<String, Integer> size : this.sizes) {
+                if (size.containsKey(sizeName)) {
+                    size.put(sizeName, size.get(sizeName) + amount);
+                }
+            }
+        } else {
+            this.sizes.add(sizeToAdd);
+        }
     }
 
-    public void reduceStock(String checkSize, int amount) {
+    public void reduceStock(String sizeName, int amount) {
         for (HashMap<String, Integer> size : this.sizes) {
-            if (size.containsKey(checkSize)){
-                Integer stock = size.get(checkSize);
+            if (size.containsKey(sizeName)){
+                Integer stock = size.get(sizeName);
                 if (stock >= amount) {
                     stock -= amount;
-                    size.replace(checkSize, stock);
+                    size.replace(sizeName, stock);
                 }
             }
         }
