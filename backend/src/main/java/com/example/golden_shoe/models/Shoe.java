@@ -15,15 +15,17 @@ public class Shoe implements IProduct {
     private ArrayList<HashMap<String, Integer>> sizes;
     private double price;
     private ArrayList<String> imageUrls;
+    private boolean featured;
 
     public Shoe() {}
 
-    public Shoe(String name, String brand, double price) {
+    public Shoe(String name, String brand, double price, boolean featured) {
         this.name = name;
         this.brand = brand;
         this.sizes = new ArrayList<HashMap<String, Integer>>();
         this.price = price;
         this.imageUrls = new ArrayList<String>();
+        this.featured = featured;
     }
 
     public String toString() {
@@ -78,6 +80,14 @@ public class Shoe implements IProduct {
 
     public void setImageUrls(ArrayList<String> imageUrls) {
         this.imageUrls = imageUrls;
+    }
+
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
     }
 
     public void addImageUrl(String url) {

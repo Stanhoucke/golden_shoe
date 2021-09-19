@@ -15,7 +15,7 @@ public class PurchaseOrderTest {
 
     @BeforeEach
     void setUp() {
-        shoe1 = new Shoe("All Stars", "Converse", 52.00);
+        shoe1 = new Shoe("All Stars", "Converse", 52.00, false);
         order1 = new Order(shoe1, ShoeSizeType.UK7.getUkSize(), 2);
         order2 = new Order(shoe1, ShoeSizeType.UK7.getUkSize(), 3);
 

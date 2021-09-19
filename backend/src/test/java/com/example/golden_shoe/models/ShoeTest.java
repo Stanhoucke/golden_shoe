@@ -11,7 +11,9 @@ public class ShoeTest {
 
     @BeforeEach
     void setUp() {
-        shoe1 = new Shoe("All Stars", "Converse", 52.00);
+        shoe1 = new Shoe("All Stars", "Converse", 52.00, true);
+        shoe1.addImageUrl("All_Stars_1.jpeg");
+        shoe1.addImageUrl("All_Stars_2.jpeg");
     }
 
     @Test
@@ -22,6 +24,16 @@ public class ShoeTest {
     @Test
     void canGetPrice() {
         assertEquals(52.00, shoe1.getPrice(), 0.0);
+    }
+
+    @Test
+    void canGetImageUrls() {
+        assertEquals(2, shoe1.getImageUrls().size());
+    }
+
+    @Test
+    void canGetFeatured() {
+        assertTrue(shoe1.isFeatured());
     }
 
     @Test

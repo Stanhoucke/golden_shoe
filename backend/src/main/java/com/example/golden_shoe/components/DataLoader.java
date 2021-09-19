@@ -28,7 +28,7 @@ public class DataLoader implements ApplicationRunner {
         shoeRepository.deleteAll();
 
         // Shoes
-        Shoe shoe1 = new Shoe("All Stars", "Converse", 52.00);
+        Shoe shoe1 = new Shoe("All Stars", "Converse", 52.00, false);
         shoe1.addStock(ShoeSizeType.UK7.getUkSize(), 20);
         shoe1.addStock(ShoeSizeType.UK8.getUkSize(), 1);
         shoe1.addStock(ShoeSizeType.UK9.getUkSize(), 5);
@@ -36,7 +36,7 @@ public class DataLoader implements ApplicationRunner {
         shoe1.addImageUrl("All_Stars_2.jpeg");
         shoe1.addImageUrl("All_Stars_3.jpeg");
 
-        Shoe shoe2 = new Shoe("Stan Smith", "Adidas", 75.00);
+        Shoe shoe2 = new Shoe("Stan Smith", "Adidas", 75.00, true);
         shoe2.addStock(ShoeSizeType.UK6.getUkSize(), 7);
         shoe2.addStock(ShoeSizeType.UK7.getUkSize(), 4);
         shoe2.addStock(ShoeSizeType.UK11.getUkSize(), 2);
@@ -44,7 +44,7 @@ public class DataLoader implements ApplicationRunner {
         shoe2.addImageUrl("Stan_Smith_2.jpeg");
         shoe2.addImageUrl("Stan_Smith_3.jpeg");
 
-        Shoe shoe3 = new Shoe("Gazelle", "Adidas", 70.00);
+        Shoe shoe3 = new Shoe("Gazelle", "Adidas", 70.00, false);
         shoe3.addStock(ShoeSizeType.UK6.getUkSize(), 4);
         shoe3.addStock(ShoeSizeType.UK8.getUkSize(), 10);
         shoe3.addStock(ShoeSizeType.UK10.getUkSize(), 6);
@@ -52,7 +52,7 @@ public class DataLoader implements ApplicationRunner {
         shoe3.addImageUrl("Gazelle_2.jpeg");
         shoe3.addImageUrl("Gazelle_3.jpeg");
 
-        Shoe shoe4 = new Shoe("KD14", "Nike", 129.95);
+        Shoe shoe4 = new Shoe("KD14", "Nike", 129.95, true);
         shoe4.addStock(ShoeSizeType.UK6.getUkSize(), 10);
         shoe4.addStock(ShoeSizeType.UK9.getUkSize(), 4);
         shoe4.addImageUrl("Kd14_1.jpeg");
