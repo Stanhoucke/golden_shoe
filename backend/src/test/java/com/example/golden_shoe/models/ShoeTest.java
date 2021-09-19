@@ -1,5 +1,6 @@
 package com.example.golden_shoe.models;
 
+import com.example.golden_shoe.enums.ShoeSizeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,40 +26,40 @@ public class ShoeTest {
 
     @Test
     void canAddStock() {
-        shoe1.addStock("5", 10);
+        shoe1.addStock(ShoeSizeType.UK5.getUkSize(), 10);
         assertEquals(1, shoe1.getSizes().size());
     }
 
     @Test
     void canAddStock_WhenSizeExists() {
-        shoe1.addStock("5", 3);
-        shoe1.addStock("7", 5);
-        shoe1.addStock("5", 2);
-        shoe1.addStock("7", 5);
+        shoe1.addStock(ShoeSizeType.UK5.getUkSize(), 3);
+        shoe1.addStock(ShoeSizeType.UK7.getUkSize(), 5);
+        shoe1.addStock(ShoeSizeType.UK5.getUkSize(), 2);
+        shoe1.addStock(ShoeSizeType.UK7.getUkSize(), 5);
         assertEquals(2, shoe1.getSizes().size());
-        assertEquals(5, shoe1.getSizes().get(0).get("5"));
-        assertEquals(10, shoe1.getSizes().get(1).get("7"));
+        assertEquals(5, shoe1.getSizes().get(0).get("UK 5"));
+        assertEquals(10, shoe1.getSizes().get(1).get("UK 7"));
 
     }
 
     @Test
     void canReduceStock() {
-        shoe1.addStock("5", 10);
-        shoe1.reduceStock("5", 2);
-        assertEquals(8, shoe1.getSizes().get(0).get("5"));
+        shoe1.addStock(ShoeSizeType.UK5.getUkSize(), 10);
+        shoe1.reduceStock(ShoeSizeType.UK5.getUkSize(), 2);
+        assertEquals(8, shoe1.getSizes().get(0).get("UK 5"));
     }
 
     @Test
     void canRemoveSizesWithoutStock() {
-        shoe1.addStock("5", 0);
+        shoe1.addStock(ShoeSizeType.UK5.getUkSize(), 0);
         shoe1.removeSizesWithoutStock();
         assertEquals(0, shoe1.getSizes().size());
     }
 
     @Test
     void canUpdatePurchasedStock() {
-        shoe1.addStock("5", 3);
-        shoe1.updatePurchasedStock("5", 3);
+        shoe1.addStock(ShoeSizeType.UK5.getUkSize(), 3);
+        shoe1.updatePurchasedStock(ShoeSizeType.UK5.getUkSize(), 3);
         assertEquals(0, shoe1.getSizes().size());
 
 

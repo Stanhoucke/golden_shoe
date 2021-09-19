@@ -1,5 +1,6 @@
 package com.example.golden_shoe.models;
 
+import com.example.golden_shoe.enums.ShoeSizeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class OrderTest {
     @BeforeEach
     void setUp() {
         shoe1 = new Shoe("All Stars", "Converse", 52.00);
-        order1 = new Order(shoe1, "UK 7", 2);
+        order1 = new Order(shoe1, ShoeSizeType.UK7.getUkSize(), 2);
     }
 
     @Test
