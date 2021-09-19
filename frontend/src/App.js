@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import Shop from './containers/Shop';
 import ShoeDetails from './components/ShoeDetails';
@@ -7,31 +7,23 @@ import Request from './helpers/Request';
 import NavBar from './components/NavBar/NavBar';
 import Help from './components/Help';
 import Shoes from './components/Shoes';
+import { ShoeContext } from './context/ShoeContext';
 
 function App() {
-  const [shoes, setShoes] = useState([]);
-  const [featuredShoes, setFeaturedShoes] = useState([]);
+  const {shoes, fetchShoes} = useContext(ShoeContext);
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const total = [...cart].reduce((total, { price, quantity }) => {
+      return (total += quantity * price);
+    }, 0);
+
+    setTotal(parseFloat(total.toFixed(2)));
+  }, [cart]);
 
   const request = new Request();
   const imgUrl = "http://localhost:8080/api/getImages/"
-  
-  useEffect (() => {
-    fetchShoes();
-  }, [])
-  
-  const fetchShoes = () => {
-    request.get("/api/shoes")
-    .then(data => {
-      setShoes(data)
-
-      const featuredShoes = data.filter((shoe) => {
-        return shoe.featured;
-      });
-      setFeaturedShoes(featuredShoes);
-
-    })
-  }
   
   const postCartItems = (orders) => {
     request.post("/api/purchase_orders", orders)
@@ -84,7 +76,8 @@ function App() {
 
   const handleCheckout = () => {
     const orders = {
-        "orders": cart
+        "orders": cart,
+        "total": total
     }
 
     postCartItems(orders);
@@ -108,7 +101,8 @@ function App() {
               cart={cart}
               removeFromCart={removeFromCart}
               handleCheckout={handleCheckout}
-              imgUrl={imgUrl}/>
+              imgUrl={imgUrl}
+              total={total}/>
           }} />
 
           <Route exact path="/shoes/:id" render={(props) => {
@@ -122,12 +116,13 @@ function App() {
 
           <Route exact path="/shoes" render={() => {
             return <Shoes
-            shoes={shoes}
-            imgUrl={imgUrl} />
+              // shoes={shoes}
+              imgUrl={imgUrl} />
           }} />
 
           <Route render={() => {
-            return <Shop featuredShoes={featuredShoes} imgUrl={imgUrl}/>
+            return <Shop
+              imgUrl={imgUrl}/>
           }} />
         </Switch>
       </Router>

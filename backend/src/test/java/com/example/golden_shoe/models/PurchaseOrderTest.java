@@ -29,9 +29,28 @@ public class PurchaseOrderTest {
     }
 
     @Test
-    void canGetOrdersMultiple() {
+    void canAddOrder() {
         purchaseOrder1.addOrder(order2);
         assertEquals(2, purchaseOrder1.getOrders().size());
     }
+
+    @Test
+    void canGetOrdersMultiple() {
+        purchaseOrder1.addOrder(order2);
+        purchaseOrder1.addOrder(order2);
+        assertEquals(3, purchaseOrder1.getOrders().size());
+    }
+
+    @Test
+    void canGetTotal() {
+        assertEquals(104.00, purchaseOrder1.getTotal(), 0.00);
+    }
+
+    @Test
+    void addOrderUpdatesTotal() {
+        purchaseOrder1.addOrder(order2);
+        assertEquals(156.00, purchaseOrder1.getTotal(), 0.00);
+    }
+
 
 }

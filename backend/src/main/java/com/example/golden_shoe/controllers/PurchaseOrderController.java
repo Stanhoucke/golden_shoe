@@ -35,8 +35,8 @@ public class PurchaseOrderController {
 
         ArrayList<Order> orders = purchaseOrder.getOrders();
         for (Order order : orders) {
-            Shoe shoe = shoeRepository.findById(order.shoe.getId()).get();
-            shoe.updatePurchasedStock(order.size, order.quantity);
+            Shoe shoe = shoeRepository.findById(order.getShoe().getId()).get();
+            shoe.updatePurchasedStock(order.getSize(), order.getQuantity());
             shoeRepository.save(shoe);
         }
         purchaseOrderRepository.save(purchaseOrder);

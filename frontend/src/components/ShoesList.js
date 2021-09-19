@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ShoeContext } from '../context/ShoeContext';
 
 const ShoeUl = styled.ul`
 list-style: none;

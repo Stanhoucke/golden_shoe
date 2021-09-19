@@ -8,12 +8,14 @@ import java.util.ArrayList;
 public class PurchaseOrder {
 
     @Id
-    public String id;
+    private String id;
 
-    public ArrayList<Order> orders;
+    private ArrayList<Order> orders;
+    private double total;
 
     public PurchaseOrder() {
         this.orders = new ArrayList<>();
+        this.total = 0;
     }
 
     public String toString() {
@@ -38,8 +40,21 @@ public class PurchaseOrder {
         this.orders = orders;
     }
 
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void addOrderToTotal(Order order) {
+        this.total += order.getQuantity() * order.getShoe().getPrice();
+    }
+
     public void addOrder(Order order) {
         this.orders.add(order);
+        addOrderToTotal(order);
     }
 
     public void addOrders(ArrayList<Order> orders) {

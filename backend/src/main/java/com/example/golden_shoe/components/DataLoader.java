@@ -70,8 +70,8 @@ public class DataLoader implements ApplicationRunner {
         Order order1 = new Order(shoe1, ShoeSizeType.UK7.getUkSize(), 2);
         Order order2 = new Order(shoe3, ShoeSizeType.UK8.getUkSize(), 1);
 
-        purchaseOrder1.orders.add(order1);
-        purchaseOrder1.orders.add(order2);
+        purchaseOrder1.addOrder(order1);
+        purchaseOrder1.addOrder(order2);
 
         purchaseOrderRepository.save(purchaseOrder1);
 

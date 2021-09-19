@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ShoeProvider } from './context/ShoeContext';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ShoeProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ShoeProvider>,
   document.getElementById('root')
 );
 

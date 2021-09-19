@@ -42,7 +42,7 @@ const CartStyle = styled.div`
     }
 `;
 
-const Cart = ({cart, removeFromCart, handleCheckout, imgUrl}) => {
+const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total}) => {
     const listItemsInCart = () => cart.map((item, index) => (
       <tr key={index}>
         <td>
@@ -56,10 +56,6 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl}) => {
         </td>
       </tr>
     ));
-
-    const cartTotal = cart.reduce((total, item) => {
-        return total + (item.price * item.quantity)
-    },0);
 
     if (cart.length === 0) {
         return(
@@ -95,7 +91,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl}) => {
                         <td></td>
                         <td></td>
                         <td>
-                            <h3>£{cartTotal.toFixed(2)}</h3>
+                            <h3>£{total}</h3>
                         </td>
                         <td></td>
                     </tr>

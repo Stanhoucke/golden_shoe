@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ShoeContext } from '../context/ShoeContext';
 import ShoesList from './ShoesList';
 
-const Shoes = ({shoes, imgUrl}) => {
+const Shoes = ({imgUrl}) => {
+    const {shoes} = useContext(ShoeContext);
     if (shoes.length === 0){
         return (<p>Loading...</p>)
     }
@@ -9,7 +11,6 @@ const Shoes = ({shoes, imgUrl}) => {
     return(
         <>
             <h3>ALL SHOES</h3>
-
             <ShoesList shoes={shoes} imgUrl={imgUrl}/>
         </>
     )

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ShoesList from '../components/ShoesList';
+import { ShoeContext } from '../context/ShoeContext';
 
 const MailingList = styled.div`
     margin: 2em 5%;
@@ -58,7 +59,8 @@ const MailingList = styled.div`
     }
 `;
 
-const Shop = ({featuredShoes, imgUrl}) => {
+const Shop = ({imgUrl}) => {
+    const {featuredShoes} = useContext(ShoeContext);
     if (featuredShoes.length === 0){
         return (<p>Loading...</p>)
     }
