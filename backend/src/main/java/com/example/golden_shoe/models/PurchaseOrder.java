@@ -37,4 +37,14 @@ public class PurchaseOrder {
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
     }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
+
+    public void addOrders(ArrayList<Order> orders) {
+        for (Order order : orders) {
+            this.addOrder(order);
+        }
+    }
 }
