@@ -6,21 +6,31 @@ import Cart from './components/Cart';
 import Request from './helpers/Request';
 import NavBar from './components/NavBar/NavBar';
 import Help from './components/Help';
+import Shoes from './components/Shoes';
 
 function App() {
   const [shoes, setShoes] = useState([]);
+  const [featuredShoes, setFeaturedShoes] = useState([]);
   const [cart, setCart] = useState([]);
 
   const request = new Request();
   const imgUrl = "http://localhost:8080/api/getImages/"
   
   useEffect (() => {
-    getShoes();
+    fetchShoes();
   }, [])
   
-  const getShoes = () => {
+  const fetchShoes = () => {
     request.get("/api/shoes")
-    .then(data => setShoes(data))
+    .then(data => {
+      setShoes(data)
+
+      const featuredShoes = data.filter((shoe) => {
+        return shoe.featured;
+      });
+      setFeaturedShoes(featuredShoes);
+
+    })
   }
   
   const postCartItems = (orders) => {
@@ -80,7 +90,7 @@ function App() {
     postCartItems(orders);
     emptyCart();
 
-    getShoes();
+    fetchShoes();
 }
   
   return (
@@ -110,8 +120,14 @@ function App() {
               imgUrl={imgUrl} />
           }} />
 
+          <Route exact path="/shoes" render={() => {
+            return <Shoes
+            shoes={shoes}
+            imgUrl={imgUrl} />
+          }} />
+
           <Route render={() => {
-            return <Shop shoes={shoes} imgUrl={imgUrl}/>
+            return <Shop featuredShoes={featuredShoes} imgUrl={imgUrl}/>
           }} />
         </Switch>
       </Router>

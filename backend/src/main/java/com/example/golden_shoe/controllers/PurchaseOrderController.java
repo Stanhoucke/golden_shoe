@@ -32,7 +32,6 @@ public class PurchaseOrderController {
 
     @PostMapping(value = "/purchase_orders")
     public ResponseEntity<PurchaseOrder> postPurchaseOrder(@RequestBody PurchaseOrder purchaseOrder){
-        purchaseOrderRepository.save(purchaseOrder);
 
         ArrayList<Order> orders = purchaseOrder.getOrders();
         for (Order order : orders) {
@@ -40,6 +39,7 @@ public class PurchaseOrderController {
             shoe.updatePurchasedStock(order.size, order.quantity);
             shoeRepository.save(shoe);
         }
+        purchaseOrderRepository.save(purchaseOrder);
         return new ResponseEntity<PurchaseOrder>(purchaseOrder, HttpStatus.CREATED);
     }
 }

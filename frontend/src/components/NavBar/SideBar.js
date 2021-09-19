@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -45,7 +45,7 @@ const Ul = styled.ul`
         padding: 12.5vh 0em;
         transition: transform 0.3s ease-in-out;
         li {
-            height: 25vh;
+            height: 20vh;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -58,14 +58,17 @@ const SideBar = ({open, handleBurgerClick, cartSize}) => {
     return (
         <Ul open={open}>
           <li>
-            <Link to = {"/cart"} id="cart-link" className="nav-link" onClick={handleBurgerClick}>Cart <span className="cart-size">{cartSize}</span></Link>
-          </li> 
-          <li>
             <Link to = {"/"} className="nav-link" onClick={handleBurgerClick}>Home</Link>
+          </li>
+          <li>
+            <Link to = {"/shoes"} className="nav-link" onClick={handleBurgerClick}>Shoes</Link>
           </li>
           <li>
             <Link to = {"/help"} className="nav-link" onClick={handleBurgerClick}>Help</Link>
           </li>
+          <li>
+            <Link to = {"/cart"} id="cart-link" className="nav-link" onClick={handleBurgerClick}>Cart <span className="cart-size">{cartSize}</span></Link>
+          </li> 
           
         </Ul>
       )

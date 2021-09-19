@@ -146,7 +146,7 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
     const shoeSizes = shoe.sizes.map((size, index) => {
         let sizeValue = Object.keys(size);
         return (
-            <option key={index} value={sizeValue}>UK {sizeValue}</option>
+            <option key={index} value={sizeValue}>{sizeValue}</option>
         )
     })
 
@@ -185,7 +185,7 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
                     "shoe": shoe,
                     "size": selectedSize,
                     "quantity": selectedQuantity,
-                    "price": shoe.price
+                    "price": shoe.price 
                 }
                 addToCart(item);
                 setSelectedSize("");
