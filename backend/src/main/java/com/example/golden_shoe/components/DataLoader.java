@@ -1,9 +1,11 @@
 package com.example.golden_shoe.components;
 
 import com.example.golden_shoe.enums.ShoeSizeType;
+import com.example.golden_shoe.models.Discount;
 import com.example.golden_shoe.models.Order;
 import com.example.golden_shoe.models.PurchaseOrder;
 import com.example.golden_shoe.models.Shoe;
+import com.example.golden_shoe.repositories.DiscountRepository;
 import com.example.golden_shoe.repositories.PurchaseOrderRepository;
 import com.example.golden_shoe.repositories.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,16 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class DataLoader implements ApplicationRunner {
     @Autowired
     ShoeRepository shoeRepository;
     @Autowired
     PurchaseOrderRepository purchaseOrderRepository;
+    @Autowired
+    DiscountRepository discountRepository;
 
     public DataLoader() {
 
@@ -26,6 +32,7 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         purchaseOrderRepository.deleteAll();
         shoeRepository.deleteAll();
+        discountRepository.deleteAll();
 
         // Shoes
         Shoe shoe1 = new Shoe("All Stars", "Converse", 52.00, false);
@@ -63,6 +70,13 @@ public class DataLoader implements ApplicationRunner {
         shoeRepository.save(shoe2);
         shoeRepository.save(shoe3);
         shoeRepository.save(shoe4);
+
+        // Discounts
+        Discount discount1 = new Discount("GOLDEN10", 0.10, LocalDateTime.now().plusDays(2));
+        Discount discount2 = new Discount("GOLDEN30", 0.30, LocalDateTime.now().minusDays(1));
+
+        discountRepository.save(discount1);
+        discountRepository.save(discount2);
 
         // Purchase Orders
         PurchaseOrder purchaseOrder1 = new PurchaseOrder();
