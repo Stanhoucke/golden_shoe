@@ -1,8 +1,10 @@
 package com.example.golden_shoe.controllers;
 
+import com.example.golden_shoe.models.Discount;
 import com.example.golden_shoe.models.Order;
 import com.example.golden_shoe.models.PurchaseOrder;
 import com.example.golden_shoe.models.Shoe;
+import com.example.golden_shoe.repositories.DiscountRepository;
 import com.example.golden_shoe.repositories.PurchaseOrderRepository;
 import com.example.golden_shoe.repositories.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class PurchaseOrderController {
     PurchaseOrderRepository purchaseOrderRepository;
     @Autowired
     ShoeRepository shoeRepository;
+    @Autowired
+    DiscountRepository discountRepository;
 
     @GetMapping(value = "/purchase_orders")
     public ResponseEntity<List<PurchaseOrder>> getAllPurchaseOrders(){
@@ -32,6 +36,7 @@ public class PurchaseOrderController {
 
     @PostMapping(value = "/purchase_orders")
     public ResponseEntity<PurchaseOrder> postPurchaseOrder(@RequestBody PurchaseOrder purchaseOrder){
+        PurchaseOrder newPurchaseOrder = new PurchaseOrder();
 
         ArrayList<Order> orders = purchaseOrder.getOrders();
         for (Order order : orders) {
@@ -39,7 +44,14 @@ public class PurchaseOrderController {
             shoe.updatePurchasedStock(order.getSize(), order.getQuantity());
             shoeRepository.save(shoe);
         }
-        purchaseOrderRepository.save(purchaseOrder);
-        return new ResponseEntity<PurchaseOrder>(purchaseOrder, HttpStatus.CREATED);
+
+        newPurchaseOrder.addOrders(orders);
+        if (purchaseOrder.getDiscount() != null && !purchaseOrder.getDiscount().isExpired()) {
+            Discount discount = discountRepository.findById(purchaseOrder.getDiscount().getId()).get();
+            newPurchaseOrder.setDiscount(discount);
+        }
+
+        purchaseOrderRepository.save(newPurchaseOrder);
+        return new ResponseEntity<PurchaseOrder>(newPurchaseOrder, HttpStatus.CREATED);
     }
 }

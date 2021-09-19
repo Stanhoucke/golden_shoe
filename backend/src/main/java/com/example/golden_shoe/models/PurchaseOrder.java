@@ -12,16 +12,18 @@ public class PurchaseOrder {
 
     private ArrayList<Order> orders;
     private double total;
+    private Discount discount;
 
     public PurchaseOrder() {
         this.orders = new ArrayList<>();
         this.total = 0;
+        this.discount = null;
     }
 
     public String toString() {
         return String.format(
-                "PurchaseOrder[id=%s, orders='%s']",
-                id, orders);
+                "PurchaseOrder[id=%s, orders='%s', total=%s, discount=%s]",
+                id, orders, total, discount);
     }
 
     public String getId() {
@@ -48,6 +50,15 @@ public class PurchaseOrder {
         this.total = total;
     }
 
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+        this.applyDiscount();
+    }
+
     public void addOrderToTotal(Order order) {
         this.total += order.getQuantity() * order.getShoe().getPrice();
     }
@@ -60,6 +71,12 @@ public class PurchaseOrder {
     public void addOrders(ArrayList<Order> orders) {
         for (Order order : orders) {
             this.addOrder(order);
+        }
+    }
+
+    private void applyDiscount() {
+        if (!this.discount.isExpired()) {
+            this.total -= (this.discount.getPercentageDiscount() * this.total);
         }
     }
 }

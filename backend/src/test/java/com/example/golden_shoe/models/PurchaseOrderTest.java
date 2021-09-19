@@ -4,7 +4,10 @@ import com.example.golden_shoe.enums.ShoeSizeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class PurchaseOrderTest {
 
@@ -12,6 +15,9 @@ public class PurchaseOrderTest {
     Order order1;
     Order order2;
     Shoe shoe1;
+    Discount discount1;
+    Discount discount2;
+    LocalDateTime expiryDate1;
 
     @BeforeEach
     void setUp() {
@@ -21,6 +27,10 @@ public class PurchaseOrderTest {
 
         purchaseOrder1 = new PurchaseOrder();
         purchaseOrder1.addOrder(order1);
+
+        expiryDate1 = LocalDateTime.now().plusDays(1);
+        discount1 = new Discount("GOLDEN50", 0.50, expiryDate1);
+        discount2 = new Discount("GOLDEN50", 0.10, expiryDate1);
     }
 
     @Test
@@ -49,8 +59,31 @@ public class PurchaseOrderTest {
     @Test
     void addOrderUpdatesTotal() {
         purchaseOrder1.addOrder(order2);
-        assertEquals(156.00, purchaseOrder1.getTotal(), 0.00);
+        assertEquals(260.00, purchaseOrder1.getTotal(), 0.00);
     }
+
+    @Test
+    void hasDiscount() {
+        purchaseOrder1.setDiscount(discount1);
+        assertEquals("GOLDEN50", purchaseOrder1.getDiscount().getName());
+    }
+    @Test
+    void hasNoDiscount() {
+        assertNull(purchaseOrder1.getDiscount());
+    }
+
+    @Test
+    void canApply50DiscountToTotal() {
+        purchaseOrder1.setDiscount(discount1);
+        assertEquals(52.00, purchaseOrder1.getTotal(), 0.00);
+    }
+
+    @Test
+    void canApply10DiscountToTotal() {
+        purchaseOrder1.setDiscount(discount2);
+        assertEquals(93.60, purchaseOrder1.getTotal(), 0.00);
+    }
+
 
 
 }
