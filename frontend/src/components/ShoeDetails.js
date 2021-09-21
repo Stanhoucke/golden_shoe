@@ -134,10 +134,9 @@ const ShoeDetailContainer = styled.div`
 }
 `;
 
-const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
+const ShoeDetails = ({shoe, addToCart, imgUrl, setErrorMessage}) => {
     const [selectedSize, setSelectedSize] = useState("");
     const [selectedQuantity, setSelectedQuantity] = useState(0);
-    const [checkStock, setCheckStock] = useState(false);
 
     if (!shoe) {
         return <p>Loading...</p>
@@ -168,17 +167,10 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
         return inStock;
     }
 
-    const stockMessage = (checkStock) ?
-        <NoStockMessage>
-            <p id="no-stock-message">This item is currently unavailable in this quantity</p>
-        </NoStockMessage>
-        :
-        <></>
-
     const handleAddShoeToCart = () => {
         let inStock = isInStock()
         if (!inStock) {
-            setCheckStock(true);
+            setErrorMessage("This item is currently unavailable in this quantity");
         } else {
             if (selectedSize !== "" && selectedQuantity > 0) {
                 const item = {
@@ -188,16 +180,15 @@ const ShoeDetails = ({shoe, addToCart, imgUrl}) => {
                     "price": shoe.price 
                 }
                 addToCart(item);
+                setErrorMessage(`Added ${shoe.name} x ${selectedQuantity} to cart!`);
                 setSelectedSize("");
                 setSelectedQuantity(0);
-                setCheckStock(false);
             }
         }
     }
 
     return(
         <>
-            {stockMessage}
             <ShoeDetailContainer>
                 <div className="shoe-images">
                     <Carousel>

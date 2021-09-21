@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter as Router} from 'react-router-dom';
 import { ShoeProvider } from './context/ShoeContext';
 
 ReactDOM.render(
   <ShoeProvider>
     <React.StrictMode>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </React.StrictMode>
   </ShoeProvider>,
   document.getElementById('root')

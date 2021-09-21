@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Shop from './containers/Shop';
 import ShoeDetails from './components/ShoeDetails';
 import Cart from './components/Cart';
@@ -8,14 +8,18 @@ import NavBar from './components/NavBar/NavBar';
 import Help from './components/Help';
 import Shoes from './components/Shoes';
 import { ShoeContext } from './context/ShoeContext';
+import ErrorPage from './components/ErrorPage';
+import Alert from './components/Alert';
 
 function App() {
+  const history = useHistory();
   const {shoes, fetchShoes} = useContext(ShoeContext);
   const [discounts, setDiscounts] = useState([]);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [discountCode, setDiscountCode] = useState("");
   const [appliedDiscount, setAppliedDiscount] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     fetchDiscounts();
@@ -50,7 +54,7 @@ function App() {
   
   const postCartItems = (orders) => {
     request.post("/api/purchase_orders", orders)
-    .then(() => window.location = "/")
+    .then(() => history.push("/"))
   }
 
   const findShoeById = (id) => {
@@ -81,7 +85,6 @@ function App() {
         setCart((currentCart) => [...currentCart, item])
       }
     }
-
   };
 
   const removeFromCart = (item) => {
@@ -90,12 +93,14 @@ function App() {
 
       if (indexOfItemToRemove === -1) {
         return currentCart;
+      } else {
+        setErrorMessage(`Removed ${item.shoe.name} from cart.`);
+        return [
+          ...currentCart.slice(0, indexOfItemToRemove),
+          ...currentCart.slice(indexOfItemToRemove + 1),
+        ];
       }
 
-      return [
-        ...currentCart.slice(0, indexOfItemToRemove),
-        ...currentCart.slice(indexOfItemToRemove + 1),
-      ];
     });
   };
 
@@ -121,15 +126,18 @@ function App() {
         "discount": appliedDiscount
     };
 
-    postCartItems(orders);
-    emptyCart();
-
-    fetchShoes();
+    try {
+      postCartItems(orders);
+      emptyCart();
+      setErrorMessage("Thank you, your order has been processed successfully.")
+      fetchShoes();
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
 }
   
   return (
     <div className="App">
-      <Router>
         <NavBar cartSize={cart.length}/>
         <div id="navbar-gap"></div>
         <Switch>
@@ -154,7 +162,8 @@ function App() {
             return <ShoeDetails 
               shoe={shoe}
               addToCart={addToCart}
-              imgUrl={imgUrl} />
+              imgUrl={imgUrl}
+              setErrorMessage={setErrorMessage} />
           }} />
 
           <Route exact path="/shoes" render={() => {
@@ -163,12 +172,15 @@ function App() {
               imgUrl={imgUrl} />
           }} />
 
-          <Route render={() => {
+          <Route exact path = "/" render={() => {
             return <Shop
               imgUrl={imgUrl}/>
           }} />
+          <Route path = "*">
+            <ErrorPage/>
+          </Route>
         </Switch>
-      </Router>
+        <Alert errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
 
     </div>
   );
