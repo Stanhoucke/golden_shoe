@@ -108,12 +108,18 @@ function App() {
 }
 
   const handleCheckout = () => {
-    const discount = appliedDiscount === undefined ? null : appliedDiscount;
-    const orders = {
+    let orders;
+    appliedDiscount === undefined ? 
+    orders = {
+      "orders": cart,
+      "total": total,
+     }
+     :
+      orders = {
         "orders": cart,
         "total": total,
-        "discount": discount
-    }
+        "discount": appliedDiscount
+    };
 
     postCartItems(orders);
     emptyCart();
@@ -138,7 +144,8 @@ function App() {
               handleCheckout={handleCheckout}
               imgUrl={imgUrl}
               total={total}
-              handleEnterDiscountCode={handleEnterDiscountCode}/>
+              handleEnterDiscountCode={handleEnterDiscountCode}
+              discount={appliedDiscount}/>
           }} />
 
           <Route exact path="/shoes/:id" render={(props) => {

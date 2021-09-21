@@ -40,9 +40,30 @@ const CartStyle = styled.div`
     #checkout {
         padding: 2em;
     }
+
+    .price-col {
+        text-align: right;
+    }
+
+    .subtotal-end {
+        border-bottom: solid;
+        border-color: black;
+        border-width: 1px;
+    }
+
+    .discount-code-success-input {
+        border: solid;
+        border-radius: 5%;
+        border-color: green;
+        color: green;
+    }
+    
+    .check-mark {
+        color: green;
+    }
 `;
 
-const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterDiscountCode}) => {
+const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterDiscountCode, discount}) => {
     const listItemsInCart = () => cart.map((item, index) => (
       <tr key={index}>
         <td>
@@ -50,12 +71,53 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterD
         </td>
         <td>{item.shoe.name} size: {item.size}</td>
         <td>{item.quantity}</td>
-        <td>£{item.price.toFixed(2)}</td>
+        <td class="price-col">£{item.price.toFixed(2)}</td>
         <td>
             <button type="submit" onClick={() => removeFromCart(item)}>Remove</button>
         </td>
       </tr>
     ));
+
+    const displayTotal = () => {
+        if (!discount) {
+            return (
+                <tr>
+                    <td><strong>TOTAL</strong></td>
+                    <td colSpan="2"></td>
+                    <td class="price-col">
+                        <h3>£{total.toFixed(2)}</h3>
+                    </td>
+                    <td></td>
+                </tr>
+            ) 
+        } else {
+            return (
+                <>
+                    <tr>
+                        <td>Sub-total</td>
+                        <td colSpan="2"></td>
+                        <td class="price-col">£{total.toFixed(2)}</td>
+                        <td></td>
+                    </tr>
+                    <tr class="subtotal-end">
+                        <td>Discount</td>
+                        <td colSpan="2"></td>
+                        <td class="price-col">- £{(Math.round(discount.percentageDiscount * total)).toFixed(2)}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL</strong></td>
+                        <td colSpan="2"></td>
+                        <td class="price-col">
+                            <h3>£{(total - (Math.round((discount.percentageDiscount * total)))).toFixed(2)}</h3>
+                        </td>
+                        <td></td>
+                    </tr>
+                </>
+            )
+        }
+    }
+    
 
     if (cart.length === 0) {
         return(
@@ -84,22 +146,13 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterD
                     {listItemsInCart()}
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td>
-                            <strong>TOTAL</strong>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <h3>£{total}</h3>
-                        </td>
-                        <td></td>
-                    </tr>
+                    {displayTotal()}
                 </tfoot>
             </table>
 
             <label htmlFor="discount-code">Discount Code: </label>
-            <input type="text" name="discount-code" placeholder="Enter Discount Code" onChange={handleEnterDiscountCode}></input>
+            <input class={discount ? "discount-code-success-input" : ""} type="text" name="discount-code" placeholder="Enter Discount Code" onChange={handleEnterDiscountCode}></input>
+            {discount ? <span class="check-mark"> &#10004;</span> : <></>}
             <div id="checkout">
                 <button onClick={handleCheckout}>Checkout</button>
             </div>
