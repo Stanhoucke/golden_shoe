@@ -60,7 +60,7 @@ const Alert = ({errorMessage, setErrorMessage}) => {
     });
     
     return(
-        <AlertStyle modalDisplay={modalDisplay}>
+        <AlertStyle modalDisplay={modalDisplay} data-cy="alert">
             <MessageStyle>
                 <span>{errorMessage}</span>
             </MessageStyle>

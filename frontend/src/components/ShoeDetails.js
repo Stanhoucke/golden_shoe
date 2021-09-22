@@ -220,10 +220,10 @@ const ShoeDetails = ({shoe, addToCart, imgUrl, setErrorMessage}) => {
 
                         <div className="quantity-wrapper form-item">
                             <label htmlFor="quantity">Quantity: </label>
-                            <input type="number" name="quantity" min="0" max="5" value={selectedQuantity} onChange={handleSelectedQuantityChange}></input>
+                            <input type="number" name="quantity" min="0" max="5" value={selectedQuantity} onChange={handleSelectedQuantityChange} data-cy="shoe-quantity-input"></input>
                         </div>
                         
-                        <button className="form-item" onClick={handleAddShoeToCart}>
+                        <button className="form-item" onClick={handleAddShoeToCart} data-cy="add-to-cart-button">
                             Add to Cart
                         </button>
                 </div>
