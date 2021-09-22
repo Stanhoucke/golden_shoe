@@ -67,13 +67,13 @@ const ShoesList = ({shoes, imgUrl}) => {
     const shoesList = shoes.map((shoe, index) => {
         return (
             <li key={shoe.id} className="shoe-item">
-                <div className="shoe">
+                <div className="shoe" data-cy={"shoe-"+index}>
                     <Link to = {"/shoes/" + shoe.id} className="shoe-link">
                         <img src={imgUrl + shoe.imageUrls[0]} className="shoe-image-main" alt={shoe.brand + " " + shoe.name + " image"}/>
-                        <div className="shoe-info">
-                                <p>{shoe.brand}</p>
-                                <p>{shoe.name}</p>
-                            <p>£{shoe.price.toFixed(2)}</p>
+                        <div className="shoe-info" data-cy={"shoe-info-"+index}>
+                            <p data-cy="shoe-brand">{shoe.brand}</p>
+                            <p data-cy="shoe-name">{shoe.name}</p>
+                            <p data-cy="shoe-price">£{shoe.price.toFixed(2)}</p>
                         </div>
                     </Link>
                 </div>

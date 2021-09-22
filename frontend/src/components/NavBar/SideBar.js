@@ -56,7 +56,7 @@ const Ul = styled.ul`
 
 const SideBar = ({open, handleBurgerClick, cartSize}) => {
     return (
-        <Ul open={open}>
+        <Ul open={open} data-cy="nav-list">
           <li>
             <Link to = {"/"} className="nav-link" onClick={handleBurgerClick}>Home</Link>
           </li>

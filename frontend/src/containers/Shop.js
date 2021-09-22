@@ -67,7 +67,7 @@ const Shop = ({imgUrl}) => {
 
     return(
         <>
-            <MailingList>
+            <MailingList data-cy='news-banner'>
                 <div className="mailing-list-message">
                     <p>Be the first to hear about new releases!</p>
                     <p>Receive discount vouchers</p>
