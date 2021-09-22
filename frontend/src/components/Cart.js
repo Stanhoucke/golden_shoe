@@ -71,7 +71,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterD
         </td>
         <td>{item.shoe.name} size: {item.size}</td>
         <td>{item.quantity}</td>
-        <td class="price-col">£{item.price.toFixed(2)}</td>
+        <td className="price-col">£{item.price.toFixed(2)}</td>
         <td>
             <button type="submit" onClick={() => removeFromCart(item)}>Remove</button>
         </td>
@@ -84,7 +84,7 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterD
                 <tr>
                     <td><strong>TOTAL</strong></td>
                     <td colSpan="2"></td>
-                    <td class="price-col">
+                    <td className="price-col">
                         <h3>£{total.toFixed(2)}</h3>
                     </td>
                     <td></td>
@@ -96,19 +96,19 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterD
                     <tr>
                         <td>Sub-total</td>
                         <td colSpan="2"></td>
-                        <td class="price-col">£{total.toFixed(2)}</td>
+                        <td className="price-col">£{total.toFixed(2)}</td>
                         <td></td>
                     </tr>
-                    <tr class="subtotal-end">
+                    <tr className="subtotal-end">
                         <td>Discount</td>
                         <td colSpan="2"></td>
-                        <td class="price-col">- £{(Math.round(discount.percentageDiscount * total)).toFixed(2)}</td>
+                        <td className="price-col">- £{(Math.round(discount.percentageDiscount * total)).toFixed(2)}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL</strong></td>
                         <td colSpan="2"></td>
-                        <td class="price-col">
+                        <td className="price-col">
                             <h3>£{(total - (Math.round((discount.percentageDiscount * total)))).toFixed(2)}</h3>
                         </td>
                         <td></td>
@@ -151,8 +151,8 @@ const Cart = ({cart, removeFromCart, handleCheckout, imgUrl, total, handleEnterD
             </table>
 
             <label htmlFor="discount-code">Discount Code: </label>
-            <input class={discount ? "discount-code-success-input" : ""} type="text" name="discount-code" placeholder="Enter Discount Code" onChange={handleEnterDiscountCode}></input>
-            {discount ? <span class="check-mark"> &#10004;</span> : <></>}
+            <input className={discount ? "discount-code-success-input" : ""} type="text" name="discount-code" placeholder="Enter Discount Code" onChange={handleEnterDiscountCode}></input>
+            {discount ? <span className="check-mark"> &#10004;</span> : <></>}
             <div id="checkout">
                 <button onClick={handleCheckout}>Checkout</button>
             </div>

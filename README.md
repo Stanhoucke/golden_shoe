@@ -2,7 +2,10 @@
 
 An e-commerce website for a well-known British shoe company, Golden Shoe.  
 
-The app uses a React frontend, Spring Boot backend, and MongoDB database. The JUnit and Cypress testing suites are used for unit, integration, and end-to-end testing.
+The app uses:
+* A React frontend, Spring Boot backend, and MongoDB database.
+* The JUnit and Cypress testing suites for unit, integration, and end-to-end testing. 
+* Postman for testing API endpoints.
 
 [View the API Documentation](https://documenter.getpostman.com/view/17606355/UUxuiVcB)
 
