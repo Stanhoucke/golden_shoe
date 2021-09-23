@@ -54,7 +54,10 @@ function App() {
   
   const postCartItems = (orders) => {
     request.post("/api/purchase_orders", orders)
-    .then(() => history.push("/"))
+    .then(() => {
+      fetchShoes();
+      history.push("/")
+    })
   }
 
   const findShoeById = (id) => {
@@ -129,8 +132,7 @@ function App() {
     try {
       postCartItems(orders);
       emptyCart();
-      setErrorMessage("Thank you, your order has been processed successfully.")
-      fetchShoes();
+      setErrorMessage("Thank you, your order has been processed successfully.");
     } catch (error) {
       setErrorMessage(error.message);
     }

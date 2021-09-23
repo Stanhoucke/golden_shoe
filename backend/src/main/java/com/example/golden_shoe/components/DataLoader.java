@@ -35,7 +35,7 @@ public class DataLoader implements ApplicationRunner {
         discountRepository.deleteAll();
 
         // Shoes
-        Shoe shoe1 = new Shoe("All Stars", "Converse", 52.00, false);
+        Shoe shoe1 = new Shoe("All Stars", "Converse", 50.00, false);
         shoe1.addStock(ShoeSizeType.UK7.getUkSize(), 20);
         shoe1.addStock(ShoeSizeType.UK8.getUkSize(), 1);
         shoe1.addStock(ShoeSizeType.UK9.getUkSize(), 5);
